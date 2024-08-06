@@ -1,0 +1,45 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.study'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+// jsp 설정 jsp하는중에 위에 오류가아닌데 오류표시가 나면 아래 문구 넣으면 해결된다.
+eclipse.wtp.facet{
+	facet name : 'jst.web', version : '5.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// 서블릿 api 자카르타 링크 메이븐에서 serveret api 검색후 자카르타 서블릿 링크 복사
+	implementation 'jakarta.servlet:jakarta.servlet-api'
+	// jstl api 메이븐에서 jstl검색후 jstl아래 자카르타 api 들어가서 원하는 링크 복사
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+	// jstl 링크 jakarta.servlet.jsp.jstl 검색후 물고기모양(이름 : Jakarta Standard Tag Library Implementation) 아이콘 들어가서 받음
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+	// Tomcat Jasper 링크복사 버전은 알아서 잘. 중간에 embed 추가해야함
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	
+	
+	// 위 링크들은 jsp를 사용하기위한 링크 연동임 일종의 implement라고 생각하면됨.
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
