@@ -20,7 +20,9 @@
 		</encoder>
 		
 		
+		<!-- 어떤식으로 파일을 관리할건지 정책 설정해주는 부분 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 저장시 내용 폼 설정 -->
 			<fileNamePattern>
 				src/main/resources/logs/tjoeun_%d{yyyy-MM-dd}.log
 			</fileNamePattern>
