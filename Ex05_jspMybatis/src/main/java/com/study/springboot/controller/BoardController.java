@@ -1,14 +1,13 @@
 package com.study.springboot.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.study.springboot.dto.Board;
 import com.study.springboot.service.BoardService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -110,23 +109,66 @@ public class BoardController {
 		return "writerForm";
 	}
 	
-	@RequestMapping("/write")
-	public String writer(HttpServletRequest request) {
-		String title = request.getParameter("title");
-		String writer = request.getParameter("writer");
-		String content = request.getParameter("content");
-		
+	/*	* 넘어온 값이 많아 객체로 받는 방식
+			- 커맨드 객체 방식
+			  : 객체로 받을 때 사용
+			 ** 요청시 전달값의 키(name속성의 값)을 객체에 담고자하는 필드명으로 작성(만들어놓은 빈클래스의 필드를 새터로 호출하기때)
+			  
+			  스프링컨테이너가 해당 객체를 기본생성자로 생성 후 setter메소드를 호출하여 넣는다		  
+		 		* Board.java파일에 보면 어노테이션이
+				  	@Data
+					@NoArgsConstructor	
+					@AllArgsConstructor
+				  이렇게 세개 있는데 @Data만 달아놨다면 생성자가 없어서 위의 방식을 사용할수 없게 된다.
 				
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", writer);
-		map.put("title", title);
-		map.put("content", content);
-		
-		boardService.insertBoard(map);
-		
-		return "redirect:list";
-	}
+			//ex) 사용예
+	*/		  
+			@RequestMapping("/write")
+//			 public String write(Board b) {
+			public String write(@ModelAttribute("form") Board b) {
+				// 위 두개의 방법 다 사용가능하지만 보통 첫번째 방법으로 많이사용함. 두번째방법은 form안에 있는 값만 받을수 있고 글 자체도 많아서
+				
+			 	String title = b.getTitle();
+			 	System.out.println("title = " +b.getTitle());
+			 	System.out.println("writer = " +b.getWriter());
+			 	System.out.println("content = " +b.getContent());
+			 	boardService.insertBoard(b);
+			 	return "redirect:list";
+			}
 	
+	
+	/*
+			- @ModelAttribute 어노테이션을 이용하는 방법
+			  : 객체로 받을 때 사용
+			 ** 요청시 전달값의 키(name속성의 값)을 객체에 담고자하는 필드명으로 작성(만들어놓은 빈클래스의 필드를 새터로 호출하기때)
+			  
+			  스프링컨테이너가 해당 객체를 기본생성자로 생성 후 setter메소드를 호출하여 넣는다	
+
+			//ex) 사용예
+			@RequestMapping("/write")
+			 public String write(@ModelAttribute("form") Board b) {
+			 	String title = b.getTitle();
+	
+	
+	
+	
+	*/
+	
+	
+	/*
+	 * @RequestMapping("/write") public String writer(HttpServletRequest request) {
+	 * String title = request.getParameter("title"); String writer =
+	 * request.getParameter("writer"); String content =
+	 * request.getParameter("content");
+	 * 
+	 * 
+	 * Map<String, String> map = new HashMap<String, String>(); map.put("name",
+	 * writer); map.put("title", title); map.put("content", content);
+	 * 
+	 * boardService.insertBoard(map);
+	 * 
+	 * return "redirect:list"; }
+	 */
 	
 	
 }
