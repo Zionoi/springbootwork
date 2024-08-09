@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.study.springboot.domain.Member;
@@ -50,4 +51,29 @@ public class MemberService {
 	public void delete(Long id) {
 		memberRepository.deleteById(id);
 	}
+
+	public Optional<Member> selectByName(String name) {
+		Optional<Member> member = memberRepository.findByUsername(name);
+		return member;
+	}
+
+	public Optional<Member> selectByEmail(String email) {
+		Optional<Member> member = memberRepository.findByEmail(email);
+		return member;
+	}
+
+	public List<Member> selectByNameLike(String username) {
+
+		return  memberRepository.findByUsernameLike(username);
+	}
+
+	public List<Member> selectByNameLikeDesc(String username) {
+		return  memberRepository.findByUsernameLikeOrderByUsernameDesc(username);
+	}
+
+	public List<Member> selectByNameLikeSort(String username, Sort sort) {
+		return  memberRepository.findByUsernameLike(username, sort);
+	}
+
+	
 }
