@@ -30,7 +30,7 @@ public class fileUploadController {
 		
 //		String result= "success";
 		try {
-							// 파일을 업로드할 위치 설정. 루트는 resources. /upload/ 업로드파일 하위에 업로드하겠다는 뜻
+							// 파일을 업로드할 위치 설정. 루트는 resources. /upload/ => upload에 / 를 붙이면 파일 하위에 업로드하겠다는 뜻 upload
 			String filePath = ResourceUtils.getFile("classpath:static/upload/").toPath().toString();
 			System.out.println("파일저장위치 : " + filePath);
 			
