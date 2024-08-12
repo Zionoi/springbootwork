@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/*
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +17,11 @@ import lombok.NoArgsConstructor;
 //Ex10AsscosiativeMappingApplication 클래스에 @EnableJpaAuditing어노테이션 반드시 추가
 @EntityListeners(AuditingEntityListener.class)
 @Entity(name="WorkOutTable")
+*/
 public class Fit {
 	@Id
 	@GeneratedValue
 	private int fNo;
-	private String 
+	//private String 
 
 }
