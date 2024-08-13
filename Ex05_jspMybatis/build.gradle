@@ -46,7 +46,7 @@ dependencies {
 	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-el'
-	//오라클 데이터를 가져와 로그로 보여주는 문구
+	//오라클 데이터를 가져와 로그로 보여주는 문구 log4jdbc설정
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 	
 }

@@ -63,7 +63,7 @@ public class MemberController {
 		Pageable pageable = PageRequest.of(page-1, 10, sort);
 		
 		Page<Member> result = memberService.selectByNameLike(search, pageable);
-		List<Member> content = result.getContent(); // 실제 객체가 담긴 List<Member>가 반환됨.
+		List<Member> content = result.getContent(); // 실제 객체(들)가 담긴 List<Member>가 반환됨.
 		long totalElements = result.getTotalElements(); // 총 레코드 수
 		int totalPages = result.getTotalPages(); 	// 총 페이지 수
 		int size = result.getSize();				//한 페이지당 항목 수

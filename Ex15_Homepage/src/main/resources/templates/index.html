@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--타임리프 사용시 넣어야하는 문구-->
+<html xmlns:th=""http://www.thymeleaf.org>	<!-- xmlns : xml name space 라는 뜻-->
+<link href="css/index.css" rel="stylesheet">
+<script src="../static/js/index.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--
+		thymleaf가 인지하는 템플릿 파일의 기본위치
+		src/main/resorces/templates 폴더
+		
+		태그에 넣을수 있는 속성
+		
+		th:text : 단순 텍스트 출력  => ex) <span th:text="${greeting}"></span>	greeting=환영합니다.  == <span>환영합니다</span>
+		th:with : 동적 변수 값 출력 => ex) <div th:with="address=${name}+'의 주소는 강남'" th:text={address}></div> 	 name = 홍길동 == <div>홍길동의 주소는 강남</div>  
+				
+	-->
+	<!--hearder.html에 있는 화면 경로설정후 띄어주기.  herder에서 th:fragment="fragment-menu" 라고 설정했으므로 :: 뒤에 fragment-menu를 적어줘서 연동-->
+	<!--include해도 됨-->
+	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
+	
+	<div class="main-img">
+		<img id="mainImage" src="img/wooo.jpg" alt="Main Image">
+
+	</div>
+	
+</body>
+</html>

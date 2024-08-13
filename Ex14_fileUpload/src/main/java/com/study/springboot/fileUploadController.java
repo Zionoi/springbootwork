@@ -24,6 +24,7 @@ public class fileUploadController {
 		return "fileForm";
 	}
 	
+	//@responseBody : 문자열 그대로 반환해준다는 뜻
 	@RequestMapping("fileUpLoad")
 	public @ResponseBody String fileUpLoad(HttpServletRequest request) {
 		JSONObject jObj = new JSONObject();
@@ -44,9 +45,9 @@ public class fileUploadController {
 				String fileName = Paths.get(filePart.getSubmittedFileName())	//사용자가 서브밋 했을때 파일이름 가져옴
 										.getFileName().toString();				// 파일이름을 문자열로 투스트링후 변수에 담음.
 				
-				String fpn = filePath + "\\" + fileName;
-			try(				
-				// 파일을 열어서 읽을때 필요한 문
+				String fpn = filePath + "\\" + fileName;		// 어디에 저장할건지 파일이름 저장과 함께 경로 설정
+			try(	//try 매개변수안에 아래문구를 넣어주면 해당 실행문 다 끝나면 자동으로 종료해줌			
+				// 파일을 열어서 읽을때 필요한 문구
 				BufferedInputStream fin = new BufferedInputStream(filePart.getInputStream());				
 				// 파일을 읽은후 저장할때 문구
 				BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(fpn)))
@@ -54,7 +55,7 @@ public class fileUploadController {
 					
 					int data;
 					while(true) {
-						data = fin.read(); // 파일을 읽을때 사용 문구
+						data = fin.read(); // 파일을 읽은후 data에 담음
 						if(data == -1)	// 파일을 다읽어서 없을경우 -1이 반환됨
 							break;
 						fout.write(data);	// 읽은 data 문자를 fout에 씀

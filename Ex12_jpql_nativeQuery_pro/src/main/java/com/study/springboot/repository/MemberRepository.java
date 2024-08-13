@@ -23,6 +23,8 @@ import com.study.springboot.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 	
 	// JPQL 쿼리 : from뒤에는 영속성에 있는 엔티티명(DB테이블이 아님. 영속성 테이블명은 반드시 대문자로)
+	// 엔티티명대문자 => 별칭입력 => 모든컬럼 가져올시 *사용불가 별칭 써야함 => 선택적으로 가져오려면 select m.name, m.age 이런식으로
+	// 넘어온 정보랑 비교시 (@Param("변수명") 넘길때 설정한 변수명과 자료형)으로 값 받은후 like :변수명. 콜론뒤에 변수명 띄어쓰기없이 입력 ':' == '=' 이라고 생각하면 됨.
 	@Query("select m from JPAPAGING m where m.name like :name order by m.id desc")
 	List<Member> findByNameLike(@Param("name") String search);
 	

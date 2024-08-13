@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <style>
+        a{text-decoration: none; color: black; cursor:pointer;}
+		.nav-area {
+			width: 100%;
+			background-color: rgb(67, 63, 71);
+			color: white;
+			border: 1px solid white;
+			height:40px;
+			text-align: center;
+			border-collapse: collapse;
+		}
+		.nav-area td{
+			width:25%;
+			font-size:16px;
+			font-weight: bold;
+		}
+		.nav-area td:hover{
+			background-color: rgb(196, 196, 196);
+			color:black;
+			cursor:pointer;
+		}
+		.main-img img {
+            width: 100%;
+            transition: opacity 1s ease-in-out;  /* 페이드 전환 */
+            opacity: 1;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+		<!--변수명이나 $ 같은걸 사용할땐 th 접두어 붙여야 사용가능-->
+	<div th:fragment="fragment-menu" >
+		<h1 align="center">SpringBoot HomePage</h1>
+		<!--로그인 전-->
+		<div th:if="${loginUser == null}" align="right">
+			<form action="login" method="post">
+				<table>
+					<tr>
+						<td>아이디</td>
+						<td><input name="id"></td>
+						<td rowspan="2"><button>로그인</button></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" name="password"></td>
+					</tr>
+					<tr> 
+						<td colspan="3" align="center">
+							<a href="enrollForm">회원가입</a>&emsp;
+							<a href="">아이디 / 비밀번호 찾기</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+			
+		</div>
+		
+		<!--로그인 후-->
+		<div th:if="${loginUser != null}" align="right">
+			<table>
+				<tr>
+				 <td th:text="${loginUser.name} + '님 환영합니다'"></td>
+				<!--/*<td th:text="|${loginUser.name}님 환영합니다|"> */--> </td>
+				<!--/*<td>[[${loginUser.name}님 환영합니다]]</td>    [[]] : 대괄호 두개는 안에 값을 문자열로 인식시켜줌*/-->
+
+				</tr>
+				<tr>
+					<td><a href="">마이페이지</a>&emsp;</td>
+					<td><a href="">로그아웃</a></td>
+				</tr>
+			</table>
+			
+		</div>
+
+		<br>
+
+		<table class="nav-area">
+			<tr>
+				<td>HOME</td>
+				<td>공지사항</td>
+				<td>게시판</td>
+				<td>찾아오는길</td>
+			</tr>
+		</table>
+
+	</div>
+	<div class="main-img">
+		<img id="mainImage" src="/static/img/wooo.jpg" alt="Main Image">
+
+	</div>
+</body>
+<script>
+	// mainImage 요소를 가져옴
+	const mainImage = document.getElementById('mainImage');
+	
+	// mainImage를 클릭했을 때 이벤트 리스너 추가
+	mainImage.addEventListener('click', function() {
+		// 이미지 페이드 아웃
+		mainImage.classList.add('fade-out');
+
+		// 페이드 아웃이 완료된 후
+		setTimeout(function() {
+			// 여기에 이미지 소스를 변경하는 코드를 추가할 수 있음
+			// 예: mainImage.src = 'new_image.jpg';
+
+			// 이미지 페이드 인
+			mainImage.classList.remove('fade-out');
+		}, 1000); // setTimeout의 시간은 CSS 전환 시간과 일치해야 함
+	});
+</script>
+</html>
