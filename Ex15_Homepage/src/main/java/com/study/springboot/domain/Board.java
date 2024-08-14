@@ -29,7 +29,7 @@ public class Board {
 			allocationSize = 1  // 증가값 1씩 증가. 지정안하면 50씩 증가함
 			)
 	@GeneratedValue(generator="boardseq") // 시퀀스 생성 (시퀀스명 지정)
-	private Long No;
+	private Long no;
 	@NonNull
 	private String title;
 	@NonNull

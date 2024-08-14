@@ -2,7 +2,7 @@
 <!--타임리프 사용시 넣어야하는 문구-->
 <html xmlns:th=""http://www.thymeleaf.org>	<!-- xmlns : xml name space 라는 뜻-->
 <link href="css/index.css" rel="stylesheet">
-<script src="../static/js/index.js"></script>
+<!--<script src="../static/js/index.js"></script>-->
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -13,11 +13,47 @@
 		src/main/resorces/templates 폴더
 		
 		태그에 넣을수 있는 속성
-		
+	* Thymeleaf를 적용하기 위해서는 “th:” 접두사로 시작	
 		th:text : 단순 텍스트 출력  => ex) <span th:text="${greeting}"></span>	greeting=환영합니다.  == <span>환영합니다</span>
 		th:with : 동적 변수 값 출력 => ex) <div th:with="address=${name}+'의 주소는 강남'" th:text={address}></div> 	 name = 홍길동 == <div>홍길동의 주소는 강남</div>  
+		
+	* 조건식(if)
+		th:if
+		th:unless
+			: <span th:if=“${role}==‘Admin’”>관리자</span>
+			  <span th:unless=“${role}==‘Admin’”>사용자</span>
+			=> role=Admin -> <span>관리자</span>
+			   나머지는 모두 -> <span>사용자</span>
+
+	* 조건식(switch)
+		th:switch
+		th:case
+			: <div th:switch=“${search}”>
+			 	<span th:case=“T”>제목</span>
+				<span th:case=“C”>내용</span>
+				<span th:case=“W”>작성자</span>
+			  </div>
+		
+			=>  search=T -> <span>제목</span>
+				search=C -> <span>내용</span>
+				search=W -> <span>작성자</span>
 				
+				
+				
+	* 반복문(each)			
+		th:each 
+			: <tr th:each=“board:${boardList}”>
+				<span>반복할 내용</span>
+			  </tr>
+			
+			=> boardList컬렉션에 3개의 게시글이 들어있다면
+				<tr>
+					<span>반복할 내용</span>
+					<span>반복할 내용</span>
+					<span>반복할 내용</span>
+				</tr>
 	-->
+	
 	<!--hearder.html에 있는 화면 경로설정후 띄어주기.  herder에서 th:fragment="fragment-menu" 라고 설정했으므로 :: 뒤에 fragment-menu를 적어줘서 연동-->
 	<!--include해도 됨-->
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
