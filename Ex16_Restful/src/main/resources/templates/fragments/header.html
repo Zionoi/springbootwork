@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="css/index.css" rel="stylesheet">
+<script src="../static/js/index.js"></script>
+<title>Insert title here</title>
+ 
+</head>
+<body>
+		<!--변수명이나 $ 같은걸 사용할땐 th 접두어 붙여야 사용가능-->
+	<div th:fragment="fragment-menu" >
+		<h1 align="center">SpringBoot HomePage</h1>
+		<!--로그인 전-->
+		<div th:if="${loginUser == null}" align="right">
+			<form action="login" method="post">
+				<table>
+					<tr>
+						<td>아이디</td>
+						<td><input name="id"></td>
+						<td rowspan="2"><button>로그인</button></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" name="password"></td>
+					</tr>
+					<tr> 
+						<td colspan="3" align="center">
+							<a href="enrollForm">회원가입</a>&emsp;
+							<a href="">아이디 / 비밀번호 찾기</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+			
+		</div>
+		
+		<!--로그인 후-->
+		<div th:if="${loginUser != null}" align="right">
+			<table>
+				<tr>
+				 <td th:text="${loginUser.name} + '님 환영합니다'"></td>
+				<!--/*<td th:text="|${loginUser.name}님 환영합니다|"> */--> </td>
+				<!--/*<td>[[${loginUser.name}님 환영합니다]]</td>    [[]] : 대괄호 두개는 안에 값을 문자열로 인식시켜줌*/-->
+
+				</tr>
+				<tr>
+					<td><a href="">마이페이지</a>&emsp;</td>
+					<td><a href="logout">로그아웃</a></td>
+				</tr>
+			</table>
+			
+		</div>
+
+		<br>
+
+		<table class="nav-area">
+			<tr>
+				<td onclick="location.href='/'">HOME</td>
+				<td onclick="location.href='menuForm'">메뉴</td>
+				<td onclick="location.href='list'">게시판</td>
+				<td>찾아오는길</td>
+			</tr>
+		</table>
+
+	</div>
+	<div class="main-img">
+		<img id="mainImage" src="/static/img/wooo.jpg" alt="Main Image">
+
+	</div>
+</body>
+
+</html>
