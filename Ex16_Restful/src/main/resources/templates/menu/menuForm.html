@@ -220,7 +220,7 @@
 		<script>
 			$(() => {
 				$("#menuSearchFrm").on('submit', e => {
-					e.preventDefault;
+					e.preventDefault();
 					findById(e.target.id.value);
 				})
 				$("#menuUpdateFrm").on('submit', e=>{
@@ -232,7 +232,7 @@
 					});
 
 					
-					$({
+					$.ajax({
 						url: '/menu',
 						data : JSON.stringify(menu),
 						method : 'PUT',
@@ -266,7 +266,7 @@
 		
 		<script>
 			$(() => {
-				$("menuDeleteFrm").on('submit', e=>{
+				$("#menuDeleteFrm").on('submit', e=>{
 					e.preventDefault();
 					let id = e.target.id.value;
 					$.ajax({
@@ -296,7 +296,7 @@
 					success (result){
 						console.log(result);
 					},
-					error: consle.log,
+					error: console.log,
 					complete(jqXHR){
 						if(jqXHR.status == 204){
 							alert("삭제되었습니다");
