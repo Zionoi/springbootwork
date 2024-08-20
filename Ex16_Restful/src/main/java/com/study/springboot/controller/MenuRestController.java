@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,6 +93,7 @@ public class MenuRestController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Menu> findById(@PathVariable(name="id") Long id) {
 		Optional<Menu> menu = menuService.findById(id);
+		System.out.println("Rcontroller id: "+menu.get());
 		if(menu.isPresent()) {
 			return ResponseEntity.ok().body(menu.get());	// ok : 200
 		}else {
@@ -101,15 +104,21 @@ public class MenuRestController {
 	@PostMapping()
 	public ResponseEntity<?> insertMenu(@RequestBody Menu menu){
 		Menu reMenu = menuService.insertMenu(menu);
-		return ResponseEntity.created(URI.create("/menu/" + reMenu.getId())).build();		
+		return ResponseEntity.created(URI.create("/menu/" + reMenu.getId())).build();		// 이 메소드는 uri를 넘겨줘야함 지금은 검색해서 가져온값의 id를 같이 넘겨줌
 	}
 	
-	/*@PutMapping()
+	@PutMapping()
 	public ResponseEntity<?> updateMenu(@RequestBody Menu menu){
-		Menu reMenu = menuService.insertMenu(menu);
-		return ResponseEntity.created(URI.create("/menu/" + reMenu.getId())).build();		
-	}*/
+		Menu reMenu = menuService.updateMenu(menu);
+		return ResponseEntity.ok(reMenu);		// ok이면 상태코드는 202		
+	}
 	
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteMenu(@PathVariable(name="id") Long id){
+		menuService.deleteMenu(id);
+		return ResponseEntity.noContent().build(); 	// noContent :204
+	}
 	
 	
 }

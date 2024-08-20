@@ -214,6 +214,8 @@
 				<input type="hidden" name="id">
 			</form>
 		</div>
+<!--								console.log("stringify : ",JSON.stringify(menu));
+					console.log("serialize : ",$('#frmData').serialize());		-->
 		
 		<script>
 			$(() => {
@@ -221,9 +223,90 @@
 					e.preventDefault;
 					findById(e.target.id.value);
 				})
+				$("#menuUpdateFrm").on('submit', e=>{
+					e.preventDefault();
+					const frmData = new FormData(e.target);		<!--FormData 인터페이스 : form에 있는 값을 객체형태로 가져옴 즉 변수이름에 값넣을수 있음-->
+					const menu ={};
+					frmData.forEach((value, key) => {
+						menu[key] = value;
+					});
+
+					
+					$({
+						url: '/menu',
+						data : JSON.stringify(menu),
+						method : 'PUT',
+						contentType : 'application/json; charset=utf-8',
+						success (result){
+							console.log(result);
+							if(result != null){
+								alert("수정되었습니다");
+							}
+						},
+						error : console.log,
+						complete(){
+							e.target.reset();
+						}
+					})
+				})
 			})
 		</script>
 		
+
+<!--	6.	DELETE /menu -->	
+		<div class="menu-test">
+			<h3>메뉴 삭제하기</h3>
+			<p>메뉴번호로 삭제</p>
+			<form name="menuDeleteFrm" id="menuDeleteFrm">
+				메뉴번호 : <input name="id"><br><br>
+				<button class="btn">삭 제</button>
+			</form>
+		</div>
+		
+		
+		<script>
+			$(() => {
+				$("menuDeleteFrm").on('submit', e=>{
+					e.preventDefault();
+					let id = e.target.id.value;
+					$.ajax({
+						url: `/menu/${id}`,
+						method: 'GET',
+						success (result){
+							if(result != null){
+								deleteMenu(id);
+							}
+						},
+						error(jqXHR) {
+							console.log(`jqXHR.status : ${jqXHR.status}`);
+							if(jqXHR.status == 404){
+								alert("조회한 메뉴는 존재하지 않습니다");
+							}
+						},
+						complete(){
+							e.target.reset();
+						}
+					})
+				})
+			})
+			const deleteMenu = id => {
+				$.ajax({
+					url:`/menu/${id}`,
+					method : 'DELETE',
+					success (result){
+						console.log(result);
+					},
+					error: consle.log,
+					complete(jqXHR){
+						if(jqXHR.status == 204){
+							alert("삭제되었습니다");
+						}
+					}
+				})
+			}
+			
+			
+		</script>
 		
 		
 	</div>
