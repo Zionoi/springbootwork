@@ -1,0 +1,46 @@
+.App {
+  display: flex;
+  align-content : center;
+  height: 100vh;
+}
+
+.left-panel, .center-panel, .main-panel, .center-panel {
+  padding: 10px;
+  box-sizing: border-box;
+  
+  
+}
+
+.left-panel {
+  width: 25%;
+  border-right: 1px solid #ddd;
+}
+
+.center-panel {
+  padding: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-panel {
+  
+  padding-top: 30px;
+  align-items: left;
+  width: 25%;
+  border-left: 1px solid #ddd;
+}
+
+.profile-img, .main-photo-img {
+  width: 100%;
+  height: auto;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
