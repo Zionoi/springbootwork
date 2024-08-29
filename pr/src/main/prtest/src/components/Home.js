@@ -5,6 +5,8 @@ import axios from 'axios';
 function Home() {
     const [mainRply, setMainRply] = useState([]);
    const [test, setTest] = useState();	 
+   const [reply_writer, setName] = useState('');
+   const [reply_content, setComent] = useState('');
 	 useEffect(() => {  // 웹 열릴때 자동실행되는 useEffect 사용
 		 axios.get('/api/mainRply')     // axios.get 통신
 		 	  .then(result => { //통신 성공시
@@ -34,21 +36,35 @@ function Home() {
       <br/><hr/>
       <div>
           <p>asdf</p>
+          <tr>
+              <td>
+                <input className="inputName" onChange={e=>{setName(e.target.value)}}/>
+                <input className="inputComent" onChange={e=>{setComent(e.target.value)}}/>
+                <button onClick={()=>{
+                  axios.post('/api/insertComent',{reply_writer: reply_writer, reply_content:reply_content}
+                       .then((result)=>{
+                        console.log('리액트 서버로 데이터 보내기 : ',result);
+                       })
+                  )
+                }}>코멘트</button>
+              </td>
+            </tr>
       {
         mainRply.map((rList)=>{
           return (
 
           <div>
+            
             <tr>
                 <td>{rList.reply_no}</td>         
-            </tr>
-            <tr>
+            
+          
                 <td>{rList.reply_writer}</td>         
-            </tr>
-            <tr>
+            
+          
                 <td>{rList.reply_content}</td>         
-            </tr>
-            <tr>
+            
+          
                 <td>{rList.create_date}</td>         
             </tr>
             </div>
