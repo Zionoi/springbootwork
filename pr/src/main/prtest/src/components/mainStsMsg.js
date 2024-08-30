@@ -29,6 +29,13 @@ function MainMsg(){
                         <button onClick={handleConfirmClick}>확인</button>
                     </div>
                 )}
+
+
+<a href="http://developers.naver.com" target="_blank">
+    <img src="로고 이미지 위치" alt="NAVER 오픈 API" />
+</a>
+
+
         </div>
     )
 }
