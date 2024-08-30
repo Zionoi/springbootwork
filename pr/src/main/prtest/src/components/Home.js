@@ -24,7 +24,7 @@ function Home() {
 				// console.log('result.data : ',result.data)
                 setTest(result.data);
              })
-     })
+     },[])
 
 
   return (
@@ -35,18 +35,18 @@ function Home() {
       <img src="main-photo.jpg" alt="Home" width={"70%"}/>
       <br/><hr/>
       <div>
-          <p>asdf</p>
+          <p>통신 테스트 {test}</p>
           <tr>
               <td>
-                <input className="inputName" onChange={e=>{setName(e.target.value)}}/>
-                <input className="inputComent" onChange={e=>{setComent(e.target.value)}}/>
+               <input className="inputName" onChange={e=>{setName(e.target.value); console.log('reply_writer : ',reply_writer);}}/>
+                <input className="inputComent" onChange={e=>{setComent(e.target.value); console.log('reply_content : ',reply_content);}}/>
                 <button onClick={()=>{
-                  axios.post('/api/insertComent',{reply_writer: reply_writer, reply_content:reply_content}
+                  axios.post('/api/insertComent',{reply_writer: reply_writer, reply_content:reply_content})
                        .then((result)=>{
                         console.log('리액트 서버로 데이터 보내기 : ',result);
                        })
-                  )
-                }}>코멘트</button>
+                  
+                }} className='insertComent'>코멘트</button>
               </td>
             </tr>
       {

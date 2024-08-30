@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Visit from './visit';
+
 
 function LeftPanel() {
     const [stMesege, setStMesege] = useState('상태 메시지를 입력하세요');
@@ -19,8 +21,11 @@ function LeftPanel() {
     return (
         <div>
             <div className="profile">
-                <p>오늘 방문자: 10명</p>
-                <p>총 방문자: 1,234명</p>
+                <div>
+                    <Visit/>
+                </div>
+                {/* <p>오늘 방문자: 10명</p>
+                <p>총 방문자: 1,234명</p> */}
                 <img src="profile.jpg" alt="Profile" className="profile-img" />
                 <div>
                     <p className="statusMesege">{stMesege}</p>
