@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
 {/* <React.StrictMode>
 </React.StrictMode> */}
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement); // createRoot 사용
+
 root.render(
- 
+  <Router>
     <App />
- 
+  </Router>
 );
+{/* <App /> */}
 
 
 // ReactDOM.render(

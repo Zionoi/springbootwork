@@ -1,11 +1,11 @@
 // Diary.js
 import React from 'react';
-
+import MyCalendar from './MyCalendar';
 function Diary() {
   return (
     <div>
       <h3>다이어리</h3>
-      <p>다이어리 콘텐츠</p>
+      <MyCalendar />
     </div>
   );
 }

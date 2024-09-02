@@ -15,7 +15,7 @@ function Home() {
                    setMainRply(result.data);
                    console.log('hello : ',{test})
 			   })   // 실패시 catch는 생략함
-	 }); // 로드되고 한번만 실행
+	 },[]); // 로드되고 한번만 실행
 
      useEffect(()=>{
         axios.get('/api/test')
