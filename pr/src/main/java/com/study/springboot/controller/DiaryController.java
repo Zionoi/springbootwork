@@ -10,39 +10,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.study.springboot.domain.Event;
+import com.study.springboot.domain.Diary;
 import com.study.springboot.service.EventService;
 
-@CrossOrigin(origins = "http://localhost:3000") // React 앱의 주소
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/events")
-public class EventController {
+public class DiaryController {
 
     @Autowired
     private EventService eventService;
 
     @GetMapping
-    public List<Event> getEvents() {
+    public List<Diary> getAllEvents() {
         return eventService.getAllEvents();
     }
 
-    @PostMapping
-    public Event createEvent(@RequestBody Event event) {
-        return eventService.createEvent(event);
-    }
-    
-    //이벤트 추가
     @PostMapping("/add")
-    public Event addEvent(@RequestBody Event event) {
-    	System.out.println("event : " + event.getTitle() + event.getId());
+    public Diary addEvent(@RequestBody Diary event) {
+        if (event.getMember() == null || event.getMember().getUserid() == null) {
+            throw new IllegalArgumentException("Member information is missing or incomplete.");
+        }
         return eventService.createEvent(event);
     }
-    
-    // 이벤트 삭제
-    @DeleteMapping("/delete/{id}")
-    public void deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
+
+    @GetMapping("/getDiary/{dNum}")
+    public Diary getDiary(@PathVariable Long dNum) {
+        System.out.println("dNum : " + dNum);
+        return eventService.getDiaryBydNum(dNum);
+    }
+
+
+    @DeleteMapping("/delete/{dNum}")
+    public void deleteEvent(@PathVariable Long dNum) {
+        eventService.deleteEvent(dNum);
     }
 }

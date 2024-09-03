@@ -11,9 +11,9 @@ const rootElement = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement); // createRoot 사용
 
 root.render(
-  <Router>
+
     <App />
-  </Router>
+  
 );
 {/* <App /> */}
 

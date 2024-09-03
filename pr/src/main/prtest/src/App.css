@@ -18,7 +18,7 @@
 
 .center-panel {
   padding: 30px;
-  width: 50%;
+  width: 72%;
   display: flex;
   flex-direction: column;
 }
@@ -27,7 +27,7 @@
   
   padding-top: 30px;
   align-items: left;
-  width: 25%;
+  width: 13%;
   border-left: 1px solid #ddd;
 }
 
@@ -44,3 +44,15 @@
   display: block;
 }
 
+/* App.css 또는 관련 CSS 파일에 추가 */
+.calendar-container {
+  width: 100%; /* 또는 원하는 너비(px, % 등) */
+  height: 800px; /* 원하는 높이(px 등) */
+}
+/* CSS 파일 또는 스타일 태그에 추가 */
+.fc-event-title {
+  white-space: nowrap; /* 제목이 한 줄로 유지되도록 설정 */
+  overflow: hidden; /* 넘치는 내용 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 내용에 '...' 표시 */
+  font-size: 0.8em; /* 폰트 크기 조정 */
+}

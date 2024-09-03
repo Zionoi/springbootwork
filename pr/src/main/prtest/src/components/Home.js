@@ -10,8 +10,8 @@ function Home() {
 	 useEffect(() => {  // 웹 열릴때 자동실행되는 useEffect 사용
 		 axios.get('/api/mainRply')     // axios.get 통신
 		 	  .then(result => { //통신 성공시
-				   console.log('result. : ',result)
-				   console.log('result.data : ',result.data)
+				  //  console.log('result. : ',result)
+				  //  console.log('result.data : ',result.data)
                    setMainRply(result.data);
                    console.log('hello : ',{test})
 			   })   // 실패시 catch는 생략함
